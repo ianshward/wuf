@@ -18,4 +18,3 @@ function wuf_feeds_plugins() {
   );
   return $info;
 }
-

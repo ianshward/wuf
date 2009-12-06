@@ -6,6 +6,7 @@ function wuf_parse($string) {
   if ($xml === FALSE || is_null($xml)) {
     return FALSE;
   }
+  // TODO: limited set.  Add support for other fields on the feed.
   $parsed_source = $item = array();
   $item['station_name'] = "{$xml->display_location->full}";
   $item['observation_time'] = _wuf_parse_date("{$xml->observation_time_rfc822}");
