@@ -8,11 +8,21 @@ function wuf_feeds_plugins() {
   $info = array();
   $info['WufParser'] = array(
     'name' => 'Weather Underground WXCurrentObXML Parser',
-    'description' => 'Parses Weather Underground feeds of type  WXCurrentObXML.',
+    'description' => 'Parses Weather Underground feeds of type WXCurrentObXML.',
     'handler' => array(
       'parent' => 'FeedsParser', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
       'class' => 'WufParser',
       'file' => 'WufParser.inc',
+      'path' => drupal_get_path('module', 'wuf') . '/classes',
+    ),
+  );
+  $info['WufHTTPFetcher'] = array(
+    'name' => 'Weather Underground WXCurrentObXML Fetcher',
+    'description' => 'Fetcher for Weather Underground feeds of type WXCurrentObXML.',
+    'handler' => array(
+      'parent' => 'FeedsHTTPFetcher', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
+      'class' => 'WufHTTPFetcher',
+      'file' => 'WufHTTPFetcher.inc',
       'path' => drupal_get_path('module', 'wuf') . '/classes',
     ),
   );
