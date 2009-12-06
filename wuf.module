@@ -1,0 +1,31 @@
+<?php
+
+
+/**
+* Implementation of hook_feeds_plugins().
+*/
+function wuf_feeds_plugins() {
+  $info = array();
+  $info['WufParser'] = array(
+    'name' => 'Weather Underground WXCurrentObXML Parser',
+    'description' => 'Parses Weather Underground feeds of type  WXCurrentObXML.',
+    'handler' => array(
+      'parent' => 'FeedsParser', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
+      'class' => 'WufParser',
+      'file' => 'WufParser.inc',
+      'path' => drupal_get_path('module', 'wuf') . '/classes',
+    ),
+  );
+  $info['WufProcessor'] = array(
+    'name' => 'Weather Underground WXCurrentObXML Processor',
+    'description' => 'Processes Weather Underground feeds of type  WXCurrentObXML.',
+    'handler' => array(
+      'parent' => 'FeedsDataProcessor', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
+      'class' => 'WufProcessor',
+      'file' => 'WufProcessor.inc',
+      'path' => drupal_get_path('module', 'wuf') . '/classes',
+    ),
+  );
+  return $info;
+}
+
