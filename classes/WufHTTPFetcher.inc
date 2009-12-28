@@ -33,6 +33,8 @@ class WufHTTPFetcher extends FeedsHTTPFetcher {
     else {
       $url = $personal_endpoint . '?ID=' . $code;
     }
+    
+    return new FeedsImportBatch($url);
 
     feeds_include_library('http_request.inc', 'http_request');
     if ($this->config['auto_detect_feeds']) {
@@ -44,7 +46,7 @@ class WufHTTPFetcher extends FeedsHTTPFetcher {
     if ($result->code != 200) {
       throw new Exception(t('Download of @url failed with code !code.', array('@url' => $url, '!code' => $result->code)));
     }
-    return new FeedsFetcherResult($result->data, 'text/xml');
+    return new FeedsImportBatch($result->data, 'text/xml');
   }
   
   /**

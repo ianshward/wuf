@@ -11,17 +11,10 @@ class WufParser extends FeedsParser {
   /**
    * Parses a raw string and returns a Feed object from it.
    */
-  public function parse(FeedsFetcherResult $fetcherResult, FeedsSource $source) {
-    if ($fetcherResult->type == 'text/filepath') {
-      $string = file_get_contents($fetcherResult->value);
-    }
-    else {
-      $string = $fetcherResult->value;
-    }
-    // TODO: feeds_include_library?  Would require extra install step
-    //feeds_include_library('common_syndication_parser.inc', 'common_syndication_parser');
+  public function parse(FeedsImportBatch $batch, FeedsSource $source) {
     module_load_include('inc', 'wuf', 'wuf.parser');
-    return new FeedsParserResult(wuf_parse($string), 'syndication');
+    $result = wuf_parse($batch->getRaw());
+    $batch->setItems($result['items']);    
   }
   
   /**
